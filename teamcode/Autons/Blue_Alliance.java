@@ -31,8 +31,10 @@ public class Blue_Alliance extends LinearOpMode {
 
         waitForStart();
 
+        double startTime = getRuntime();
+
         //Sets the jewel manipulator to center position with the arm extended
-        while (getRuntime() >= 0 && getRuntime() <= 2 && opModeIsActive()) {
+        while (getRuntime() - startTime  >= 0 && getRuntime() - startTime <= 2 && opModeIsActive()) {
             colorArm.setPosition(0);
             colorPivot.setPosition(0.5);
 
@@ -40,14 +42,14 @@ public class Blue_Alliance extends LinearOpMode {
         }
 
         //Runs a function which checks the color of the jewel and moves based on it
-        while (getRuntime() >= 2 && getRuntime() <= 4 && opModeIsActive()) {
+        while (getRuntime() - startTime >= 2 && getRuntime()- startTime <= 4 && opModeIsActive()) {
             blueAllianceColor();
 
             idle();
         }
 
         //Resets the position of the jewel manipulator
-        while (getRuntime() >= 4 && getRuntime() <= 6 && opModeIsActive()) {
+        while (getRuntime()- startTime >= 4 && getRuntime()- startTime <= 6 && opModeIsActive()) {
             colorPivot.setPosition(0.5);
             colorArm.setPosition(0.9);
 
@@ -55,7 +57,7 @@ public class Blue_Alliance extends LinearOpMode {
         }
 
         //Drives the robot to the safezone
-        while (getRuntime() >= 6 && getRuntime() <= 8 && opModeIsActive()) {
+        while (getRuntime()- startTime >= 6 && getRuntime()- startTime <= 8 && opModeIsActive()) {
 
             frontLeft.setPower(-0.75);
             backLeft.setPower(-0.75);
@@ -67,7 +69,7 @@ public class Blue_Alliance extends LinearOpMode {
         }
 
         //Drives the robot backwards in order to not score be in contact with a glyph in the cryptobox
-        while (getRuntime() >= 8 && getRuntime() <= 9 && opModeIsActive()) {
+        while (getRuntime()- startTime >= 8 && getRuntime()- startTime <= 9 && opModeIsActive()) {
 
             frontLeft.setPower(0.25);
             backLeft.setPower(0.25);

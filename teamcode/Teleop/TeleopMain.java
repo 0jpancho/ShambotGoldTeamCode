@@ -49,13 +49,16 @@ public class TeleopMain extends OpMode {
 
         lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         relic.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        leftRoller.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRoller.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override
     public void loop(){
 
         /*forward*/
-        if (gamepad1.left_stick_y < -0.25) {
+        if (gamepad1.left_stick_y < -0.05) {
             frontLeft.setPower(-driveSpeed);
             backLeft.setPower(-driveSpeed);
 
@@ -66,7 +69,7 @@ public class TeleopMain extends OpMode {
         }
 
         /*backward*/
-        else if (gamepad1.left_stick_y > 0.25) {
+        else if (gamepad1.left_stick_y > 0.05) {
             frontLeft.setPower(driveSpeed);
             backLeft.setPower(driveSpeed);
 
@@ -77,7 +80,7 @@ public class TeleopMain extends OpMode {
         }
 
         /*strafe left*/
-        else if (gamepad1.left_stick_x < -0.25) {
+        else if (gamepad1.left_stick_x < -0.05) {
             frontLeft.setPower(strafeSpeed);
             frontRight.setPower(strafeSpeed);
 
@@ -88,7 +91,7 @@ public class TeleopMain extends OpMode {
         }
 
         /*strafe right*/
-        else if (gamepad1.left_stick_x > 0.25) {
+        else if (gamepad1.left_stick_x > 0.05) {
             frontLeft.setPower(-strafeSpeed);
             frontRight.setPower(-strafeSpeed);
 
@@ -123,8 +126,8 @@ public class TeleopMain extends OpMode {
          * Deadzone for drive base. disallows movement of the drive train unless
          *  a value of 0.25 is exceeded by the joystick in any direction
          */
-        else if (gamepad1.left_stick_y < 0.25 && gamepad1.left_stick_y > -0.25 &&
-                gamepad1.left_stick_x < 0.25 && gamepad1.left_stick_x > -0.25) {
+        else if (gamepad1.left_stick_y < 0.05 && gamepad1.left_stick_y > -0.05 &&
+                gamepad1.left_stick_x < 0.05 && gamepad1.left_stick_x > -0.05) {
 
             frontLeft.setPower(0);
             frontRight.setPower(0);
@@ -138,7 +141,7 @@ public class TeleopMain extends OpMode {
          * Diagonal drive code. Allows us to drive diagonally relative to our relic manipulator.
          * Aids the driver in lining up our robot to pick up the relic during teleop.
          */
-        else if(gamepad1.dpad_up)
+        if(gamepad1.dpad_up)
         {
             frontLeft.setPower(1);
             backRight.setPower(-1);
@@ -149,13 +152,18 @@ public class TeleopMain extends OpMode {
             backRight.setPower(1);
         }
 
+        else {
+            frontLeft.setPower(0);
+            backRight.setPower(0);
+        }
+
         //Controls the lift motor for the glyph manipulator
-        if (gamepad2.left_stick_y < -0.25)
+        if (gamepad2.left_stick_y < -0.05)
         {
             lift.setPower(liftSpeed);
         }
 
-        else if (gamepad2.left_stick_y > 0.25)
+        else if (gamepad2.left_stick_y > 0.05)
         {
             lift.setPower(-liftSpeed);
         }
@@ -189,12 +197,12 @@ public class TeleopMain extends OpMode {
 
 
     //Control of the motor on the relic manipulator
-    if (gamepad1.right_stick_y < -0.25)
+    if (gamepad1.right_stick_y < -0.05)
     {
         relic.setPower(1);
     }
 
-    else if (gamepad1.right_stick_y > 0.25)
+    else if (gamepad1.right_stick_y > 0.05)
     {
         relic.setPower(-1);
     }
@@ -215,16 +223,16 @@ public class TeleopMain extends OpMode {
     }
 
     //Intake roller control
-    if (gamepad2.right_stick_y < -0.25)
-    {
-        leftRoller.setPower(-0.75);
-        rightRoller.setPower(0.75);
-    }
-
-    else if (gamepad2.right_stick_y > 0.25)
+    if (gamepad2.right_stick_y < -0.05)
     {
         leftRoller.setPower(0.75);
         rightRoller.setPower(-0.75);
+    }
+
+    else if (gamepad2.right_stick_y > 0.05)
+    {
+        leftRoller.setPower(-0.75);
+        rightRoller.setPower(0.75);
     }
 
     else
@@ -233,13 +241,13 @@ public class TeleopMain extends OpMode {
         rightRoller.setPower(0);
     }
     //Elevator omni roller control
-    if(gamepad2.left_trigger > 0.25)
+    if(gamepad2.left_trigger > 0.05)
     {
         leftElevator.setPower(1);
         rightElevator.setPower(-1);
     }
 
-    else if(gamepad2.right_trigger > 0.25)
+    else if(gamepad2.right_trigger > 0.05)
     {
         leftElevator.setPower(-1);
         rightElevator.setPower(1);

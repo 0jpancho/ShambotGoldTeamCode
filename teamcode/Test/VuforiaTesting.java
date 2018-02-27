@@ -69,9 +69,11 @@ public class VuforiaTesting extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
+        double startTime = getRuntime();
+
         relicTrackables.activate();
 
-            while (getRuntime() >= 0 && getRuntime() <= 2 && opModeIsActive()) {
+            while (getRuntime() - startTime >= 0 && getRuntime() - startTime <= 2 && opModeIsActive()) {
                 colorArm.setPosition(0);
                 colorPivot.setPosition(0.5);
 
@@ -81,7 +83,7 @@ public class VuforiaTesting extends LinearOpMode {
             }
 
             //Runs a function which checks the color of the jewel and moves based on it
-            while (getRuntime() >= 2 && getRuntime() <= 4 && opModeIsActive()) {
+            while (getRuntime() - startTime >= 2 && getRuntime() - startTime <= 4 && opModeIsActive()) {
                 blueAllianceColor();
 
                 telemetry.addData("Current Action", "Blue Alliance Color");
@@ -90,7 +92,7 @@ public class VuforiaTesting extends LinearOpMode {
             }
 
             //Resets the position of the jewel manipulator
-            while (getRuntime() >= 4 && getRuntime() <= 6 && opModeIsActive()) {
+            while (getRuntime() - startTime >= 4 && getRuntime() - startTime <= 6 && opModeIsActive()) {
                 colorPivot.setPosition(0.5);
                 colorArm.setPosition(0.9);
 
@@ -109,7 +111,7 @@ public class VuforiaTesting extends LinearOpMode {
                     //Sets the jewel manipulator to center position with the arm extended
 
                     //Drives the robot to the safezone
-                    while (getRuntime() >= 6 && getRuntime() <= 8 && opModeIsActive()) {
+                    while (getRuntime() - startTime >= 6 && getRuntime() - startTime <= 8 && opModeIsActive()) {
 
                         frontLeft.setPower(-0.75);
                         backLeft.setPower(-0.75);
@@ -123,7 +125,7 @@ public class VuforiaTesting extends LinearOpMode {
                     }
 
                     //Drives the robot backwards in order to not score be in contact with a glyph in the cryptobox
-                    while (getRuntime() >= 8 && getRuntime() <= 9 && opModeIsActive()) {
+                    while (getRuntime() - startTime >= 8 && getRuntime() - startTime <= 9 && opModeIsActive()) {
 
                         frontLeft.setPower(0.25);
                         backLeft.setPower(0.25);
@@ -136,20 +138,13 @@ public class VuforiaTesting extends LinearOpMode {
                         idle();
                     }
                 }
-
-                else {
-                    telemetry.addData("VuMark", "not visible");
-                }
-
-                telemetry.update();
-                //Function that checks the color of the jewel, assuming you are the Blue Alliance
             }
 
             //If the VumMark returns CENTER
-            else if (vuMark.equals(RelicRecoveryVuMark.CENTER))
+            if (vuMark.equals(RelicRecoveryVuMark.CENTER))
             {
                 //Closes glyph arms
-                while (getRuntime() >= 6 && getRuntime() <= 8 && opModeIsActive()) {
+                while (getRuntime() - startTime >= 6 && getRuntime() - startTime <= 8 && opModeIsActive()) {
 
                     topLiftLeft.setPosition(0);
                     bottomLiftLeft.setPosition(1);
@@ -163,7 +158,7 @@ public class VuforiaTesting extends LinearOpMode {
                 }
 
                 //Elevates lift for glyph manipulator
-                while (getRuntime() >= 8 && getRuntime() <= 10 && opModeIsActive()) {
+                while (getRuntime() - startTime >= 8 && getRuntime() - startTime <= 10 && opModeIsActive()) {
 
                     lift.setPower(-0.5);
 
@@ -175,7 +170,7 @@ public class VuforiaTesting extends LinearOpMode {
                 lift.setPower(0);
 
                 //Strafes right to line up with center crypto column
-                while (getRuntime() >= 10 && getRuntime() <= 12 && opModeIsActive()) {
+                while (getRuntime() - startTime >= 10 && getRuntime() - startTime <= 12 && opModeIsActive()) {
 
                     frontLeft.setPower(-0.25);
                     frontRight.setPower(-0.25);
@@ -189,7 +184,7 @@ public class VuforiaTesting extends LinearOpMode {
                 }
 
                 //Drives forward to crypto column
-                while (getRuntime() >= 12 && getRuntime() <= 16 && opModeIsActive()){
+                while (getRuntime() - startTime >= 12 && getRuntime() - startTime <= 16 && opModeIsActive()){
 
                     frontLeft.setPower(-0.75);
                     backLeft.setPower(-0.75);
@@ -203,7 +198,7 @@ public class VuforiaTesting extends LinearOpMode {
                 }
 
                 //Opens glyph servos
-                while (getRuntime() >= 16 && getRuntime() <= 18 && opModeIsActive())
+                while (getRuntime() - startTime >= 16 && getRuntime() - startTime <= 18 && opModeIsActive())
                 {
                     topLiftLeft.setPosition(0.4);
                     bottomLiftLeft.setPosition(0.6);
@@ -216,7 +211,7 @@ public class VuforiaTesting extends LinearOpMode {
                     idle();
                 }
 
-                while (getRuntime() >= 18 && getRuntime() <= 20 && opModeIsActive())
+                while (getRuntime() - startTime >= 18 && getRuntime() - startTime <= 20 && opModeIsActive())
                 {
                     frontLeft.setPower(0.25);
                     backLeft.setPower(0.25);
@@ -231,10 +226,10 @@ public class VuforiaTesting extends LinearOpMode {
             }
 
             //If the VuMark returns RIGHT
-            else if (vuMark.equals(RelicRecoveryVuMark.RIGHT))
+            if (vuMark.equals(RelicRecoveryVuMark.RIGHT))
             {
                 //Closes glyph arms
-                while (getRuntime() >= 6 && getRuntime() <= 8 && opModeIsActive()) {
+                while (getRuntime() - startTime >= 6 && getRuntime() - startTime <= 8 && opModeIsActive()) {
 
                     topLiftLeft.setPosition(0);
                     bottomLiftLeft.setPosition(1);
@@ -248,7 +243,7 @@ public class VuforiaTesting extends LinearOpMode {
                 }
 
                 //Elevates lift for glyph manipulator
-                while (getRuntime() >= 8 && getRuntime() <= 10 && opModeIsActive()) {
+                while (getRuntime() - startTime >= 8 && getRuntime() - startTime <= 10 && opModeIsActive()) {
 
                     lift.setPower(-0.5);
 
@@ -260,7 +255,7 @@ public class VuforiaTesting extends LinearOpMode {
                 lift.setPower(0);
 
                 //Strafes right to line up with center crypto column
-                while (getRuntime() >= 10 && getRuntime() <= 14 && opModeIsActive()) {
+                while (getRuntime() - startTime >= 10 && getRuntime() - startTime <= 14 && opModeIsActive()) {
 
                     frontLeft.setPower(-0.25);
                     frontRight.setPower(-0.25);
@@ -274,7 +269,7 @@ public class VuforiaTesting extends LinearOpMode {
                 }
 
                 //Drives forward to crypto column
-                while (getRuntime() >= 14 && getRuntime() <= 18 && opModeIsActive()){
+                while (getRuntime() - startTime>= 14 && getRuntime() - startTime <= 18 && opModeIsActive()){
 
                     frontLeft.setPower(-0.75);
                     backLeft.setPower(-0.75);
@@ -287,7 +282,7 @@ public class VuforiaTesting extends LinearOpMode {
                     idle();
                 }
 
-                while (getRuntime() >= 18 && getRuntime() <= 20 && opModeIsActive())
+                while (getRuntime() - startTime >= 18 && getRuntime() - startTime <= 20 && opModeIsActive())
                 {
                     topLiftLeft.setPosition(0.4);
                     bottomLiftLeft.setPosition(0.6);
@@ -300,7 +295,7 @@ public class VuforiaTesting extends LinearOpMode {
                     idle();
                 }
 
-                while (getRuntime() >= 20 && getRuntime() <= 22 && opModeIsActive())
+                while (getRuntime() - startTime >= 20 && getRuntime() - startTime <= 22 && opModeIsActive())
                 {
                     frontLeft.setPower(0.25);
                     backLeft.setPower(0.25);
